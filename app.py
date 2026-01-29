@@ -30,11 +30,11 @@ st.markdown("""
         color: #E6EDF3;
     }
     
-    /* Metrics Styling */
+    /* Metrics Styling - Large & Teal */
     [data-testid="stMetricValue"] {
-        font-size: 2.2rem;
-        font-weight: 600;
-        color: #F0F6FC;
+        font-size: 3.5rem !important;
+        font-weight: 700 !important;
+        color: #00ADB5 !important;
     }
     
     [data-testid="stMetricLabel"] {
@@ -44,8 +44,10 @@ st.markdown("""
         letter-spacing: 0.05em;
     }
     
-    /* Sidebar Specific Styling */
+    /* Sidebar Specific Styling - Narrower Look */
     [data-testid="stSidebar"] {
+        min-width: 250px !important;
+        max-width: 250px !important;
         background-color: #161B22;
         border-right: 1px solid #30363D;
     }
@@ -66,11 +68,18 @@ st.markdown("""
         font-size: 0.92rem !important;
     }
     
-    /* Transparent Dataframes */
+    /* Transparent Dataframes - Aggressive Overrides */
     [data-testid="stDataFrame"] {
         background-color: transparent !important;
     }
     [data-testid="stDataFrame"] > div {
+        background-color: transparent !important;
+    }
+    [data-testid="stTable"] {
+        background-color: transparent !important;
+    }
+    /* Target the table cells specifically */
+    div[data-testid="stDataFrame"] div[class*="stDataFrame"] div[class*="dataframe"] {
         background-color: transparent !important;
     }
     
