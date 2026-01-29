@@ -14,10 +14,14 @@ st.set_page_config(
 # --- CSS Styling for Premium Aesthetics ---
 st.markdown("""
 <style>
-    /* Reduce top whitespace */
+    /* Reduce top whitespace & Match Header */
     .block-container {
-        padding-top: 2rem !important;
+        padding-top: 1rem !important;
         padding-bottom: 1rem !important;
+    }
+    
+    header[data-testid="stHeader"] {
+        background-color: #0E1117 !important;
     }
 
     /* Dark Mode Enforcement & Custom Palette */
@@ -28,14 +32,16 @@ st.markdown("""
     
     /* Metrics Styling */
     [data-testid="stMetricValue"] {
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: #00ADB5;
+        font-size: 2.2rem;
+        font-weight: 600;
+        color: #F0F6FC;
     }
     
     [data-testid="stMetricLabel"] {
-        color: #C9D1D9 !important;
-        font-size: 1rem !important;
+        color: #8B949E !important;
+        font-size: 0.9rem !important;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
     }
     
     /* Sidebar Styling */
@@ -58,6 +64,35 @@ st.markdown("""
     /* General Text */
     p, .stMarkdown {
         color: #C9D1D9;
+    }
+    
+    /* FORCE THEME OVERRIDES */
+    /* Checkbox & Radio Buttons */
+    div[data-testid="stCheckbox"] label span:first-child {
+        background-color: #0E1117 !important;
+        border-color: #30363D !important;
+    }
+    div[data-testid="stCheckbox"] label[data-checked="true"] span:first-child {
+        background-color: #00ADB5 !important;
+        border-color: #00ADB5 !important;
+    }
+    
+    /* Year Slider (Range) */
+    div[data-testid="stSlider"] div[data-baseweb="slider"] div {
+        background-color: #00ADB5 !important;
+    }
+    div[data-testid="stSlider"] div[data-baseweb="slider"] div[role="slider"] {
+        background-color: #F0F6FC !important;
+        border: 2px solid #00ADB5 !important;
+    }
+    
+    /* Tabs */
+    button[data-baseweb="tab"] {
+        color: #8B949E !important;
+    }
+    button[data-baseweb="tab"][aria-selected="true"] {
+        color: #00ADB5 !important;
+        border-bottom-color: #00ADB5 !important;
     }
 </style>
 """, unsafe_allow_html=True)
