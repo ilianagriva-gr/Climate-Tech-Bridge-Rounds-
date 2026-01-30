@@ -46,6 +46,7 @@ st.markdown("""
     
     /* Sidebar Specific Styling - Narrower Look */
     [data-testid="stSidebar"] {
+        width: 250px !important;
         min-width: 250px !important;
         max-width: 250px !important;
         background-color: #161B22;
@@ -54,6 +55,23 @@ st.markdown("""
     
     [data-testid="stSidebar"] .stMarkdown, [data-testid="stSidebar"] p, [data-testid="stSidebar"] label {
         font-size: 0.85rem !important;
+    }
+
+    /* CUSTOM HTML METRICS (Teal & Large) */
+    .metric-box {
+        text-align: center;
+        padding: 10px;
+    }
+    .metric-label {
+        color: #8B949E;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+    .metric-value {
+        color: #00ADB5;
+        font-size: 3.5rem;
+        font-weight: 700;
     }
 
     /* Headers */
@@ -203,10 +221,10 @@ with tab1:
     avg_deal_size = filtered_df['Deal Size'].mean() if deal_count > 0 else 0
     unique_companies = filtered_df['Company'].nunique()
 
-    col1.metric("Total Capital Raised", f"${total_capital:,.1f}M")
-    col2.metric("Total Deals", deal_count)
-    col3.metric("Avg Deal Size", f"${avg_deal_size:,.1f}M")
-    col4.metric("Active Companies", unique_companies)
+    col1.markdown(f'<div class="metric-box"><div class="metric-label">Total Capital Raised</div><div class="metric-value">${total_capital:,.1f}M</div></div>', unsafe_allow_html=True)
+    col2.markdown(f'<div class="metric-box"><div class="metric-label">Total Deals</div><div class="metric-value">{deal_count}</div></div>', unsafe_allow_html=True)
+    col3.markdown(f'<div class="metric-box"><div class="metric-label">Avg Deal Size</div><div class="metric-value">${avg_deal_size:,.1f}M</div></div>', unsafe_allow_html=True)
+    col4.markdown(f'<div class="metric-box"><div class="metric-label">Active Companies</div><div class="metric-value">{unique_companies}</div></div>', unsafe_allow_html=True)
 
     st.divider()
 
@@ -780,12 +798,16 @@ with tab4:
     It stands out for its structural complexity and the strategic expansion of the investor base.
     """)
     
-    # Key Stats Row
+    # Key Stats Row - Custom HTML to guarantee styling
     cfs_col1, cfs_col2, cfs_col3, cfs_col4 = st.columns(4)
-    cfs_col1.metric("Total Deal Size", "$863M")
-    cfs_col2.metric("Equity Component", "$763M")
-    cfs_col3.metric("New Debt", "$100M")
-    cfs_col4.metric("Total Investors", "47")
+    with cfs_col1:
+        st.markdown('<div class="metric-box"><div class="metric-label">Total Deal Size</div><div class="metric-value">$863M</div></div>', unsafe_allow_html=True)
+    with cfs_col2:
+        st.markdown('<div class="metric-box"><div class="metric-label">Equity Component</div><div class="metric-value">$763M</div></div>', unsafe_allow_html=True)
+    with cfs_col3:
+        st.markdown('<div class="metric-box"><div class="metric-label">New Debt</div><div class="metric-value">$100M</div></div>', unsafe_allow_html=True)
+    with cfs_col4:
+        st.markdown('<div class="metric-box"><div class="metric-label">Total Investors</div><div class="metric-value">47</div></div>', unsafe_allow_html=True)
     
     st.divider()
 
@@ -802,7 +824,8 @@ with tab4:
         {"Deal": "Deal #2", "Type": "Accelerator", "Date": "01-Oct-2018", "Amount": "N/A", "Raised to Date": "N/A", "Status": "Completed"},
         {"Deal": "Deal #1", "Type": "Spin-Off", "Date": "01-Jan-2018", "Amount": "N/A", "Raised to Date": "N/A", "Status": "Completed"},
     ])
-    st.dataframe(deal_history, use_container_width=True)
+    # Use st.table for guaranteed transparency via CSS
+    st.table(deal_history)
 
     st.divider()
 
